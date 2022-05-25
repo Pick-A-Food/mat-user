@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Vision UI</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h1>Google Vision API Use</h1>
+    <form class="imageForm" action="/vision/analysis" method="post">
+        <input type="file" accept="image/*" required/>
+        <input type="text" />
+        <button>Submit</button>
+    </form>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  const imageForm = document.querySelector(".imageForm");
+  console.log(imageForm)
+  imageForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log(document.querySelector('input[type="file"]'))
+    let file = document.querySelector('input[type="file"]').files[0];
+    getBase64(file).then(
+        data => {
+          console.log(data);
+          console.log(typeof data);
+          imageForm.querySelector("input[type='text']").value = data;
+        }
+    );
+
+  }, false);
+
+
+</script>
+
+</body>
+</html>

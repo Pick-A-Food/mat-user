@@ -32,7 +32,11 @@ dependencies {
     // https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
 
-
+    // google vision api
+    implementation platform('com.google.cloud:libraries-bom:25.3.0')
+    implementation 'com.google.cloud:google-cloud-bigquery'
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-vision
+    implementation 'org.springframework.cloud:spring-cloud-gcp-starter-vision:1.2.8.RELEASE'
 
 }
 
