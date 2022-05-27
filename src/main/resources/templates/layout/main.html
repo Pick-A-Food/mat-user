@@ -38,16 +38,28 @@
 
     <!-- Top tool -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-inline-flex" href="index.html"><img class="d-inline-block" th:src="@{/assets/img/gallery/logo.png}" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient">Pick A Food</span></a>
+        <div class="container"><a class="navbar-brand d-inline-flex" href="index.html"><img class="d-inline-block" th:src="@{/assets/img/gallery/logo.png}" alt="logo" /></a><!--<span class="text-1000 fs-3 fw-bold ms-2 text-gradient">Pick A Food</span>-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
-            <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
-                <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
-                    <p class="mb-0 fw-bold text-lg-center"><span class="fw-normal">알레르기 보유자들을 위한  </span><span> 검색, 알림, 추천 서비스</span></p>
-                </div>
+
+            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
+                <p class="mb-0 fw-bold text-lg-center"><span class="fw-normal">알레르기 보유자들을 위한  </span><span> 검색, 알림, 추천 서비스</span></p>
+            </div>
+            <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" >
+
+            </div>
+            <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-2" id="navbarSupportedContent" style="margin: 0px">
                 <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
-                    <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
-                        <input class="form-control border-0 input-box bg-100" type="search" placeholder="Search Food" aria-label="Search" />
+                    <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                        <div class="navbar-nav m-auto py-0">
+                            <a th:href="@{/main/main}" class="nav-item nav-link">메 인</a>
+                            <a th:href="@{/food/list}" class="nav-item nav-link">알레르기 지식창고</a>
+                            <a th:href="@{/board/list}" class="nav-item nav-link">자유게시판</a>
+                            <a th:href="@{/meal/school}" class="nav-item nav-link">급 식</a>
+                        </div>
                     </div>
+                    <!--<div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
+                        <input class="form-control border-0 input-box bg-100" type="search" placeholder="Search Food" aria-label="Search" />
+                    </div>-->
                     <button class="btn btn-white shadow-warning text-warning" type="submit"> <i class="fas fa-user me-2"></i>Login</button>
                 </form>
             </div>
@@ -56,19 +68,18 @@
     <!-- Top tool -->
 
 
-    <section class="py-5 overflow-hidden bg-primary" id="home" style="background-color: #ebfcf1">
+    <!-- 검색 창 / 메인 보드-->
+    <section class="py-1 overflow-hidden" id="home" style="background-color: #ebfcf1" >
         <div class="container">
             <div class="row flex-center">
                 <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-8 mt-md-0"><a class="img-landing-banner" href="#!"><img class="img-fluid" th:src="@{/assets/img/gallery/hero-header.png}" alt="hero-header" /></a></div>
                 <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
-                    <h1 class="display-10 fs-md-5 fs-lg-6 fs-xl-8 text-light">안전한 음식을 위해</h1>
-                    <h1 class="text-800 mb-5 fs-4">재료를 검색 <br class="d-none d-xxl-block" />어쩌구 저쩌구</h1>
+                    <h1 class="display-10 fs-md-5 fs-lg-6 fs-xl-8 text-dark">안전한 음식을 위해</h1>
+                    <h1 class="text-800 mb-5 fs-4"><br class="d-none d-xxl-block" />어쩌구 저쩌구</h1>
                     <div class="card w-xxl-75">
                         <div class="card-body">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active mb-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-motorcycle me-2"></i>식품</button>
-                                    <button class="nav-link mb-3" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-shopping-bag me-2"></i>급식</button>
                                 </div>
                             </nav>
                             <div class="tab-content mt-3" id="nav-tabContent">
@@ -77,11 +88,11 @@
                                         <div class="col">
                                             <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
                                                 <label class="visually-hidden" for="inputDelivery">Address</label>
-                                                <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address" />
+                                                <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="음식명을 입력하세요" />
                                             </div>
                                         </div>
                                         <div class="d-grid gap-3 col-sm-auto">
-                                            <button class="btn btn-danger" type="submit">Find Food</button>
+                                            <button class="btn btn-dark" type="submit">Find Food</button>
                                         </div>
                                     </form>
                                 </div>
@@ -106,11 +117,358 @@
         </div>
     </section>
 
+    <!-- 레스토랑 -->
+    <section id="testimonial" style="padding-top: 60px; padding-bottom: 0px">
+        <div class="container">
+            <div class="row h-100">
+                <div class="col-lg-7 mx-auto text-center mb-6">
+                    <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">다양한 식당 종류들~~~~</h5>
+                </div>
+            </div>
+            <div class="row gx-2">
+
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/food-world.png}" alt="..." />
+
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/food-world-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">CJ 제일제당</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">46</span>
+                                </div>
+                            </div><span class="badge bg-soft-danger p-2"><span class="fw-bold fs-1 text-danger">식품 유형</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 반복 부분 -->
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/pizza-hub.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">10% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/pizzahub-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Pizza hub</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">40</span>
+                                </div>
+                            </div><span class="badge bg-soft-danger p-2"><span class="fw-bold fs-1 text-danger">이렇게 반복할거야</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/donuts-hut.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">15% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/donuts-hut-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Donuts hut</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">20</span>
+                                </div>
+                            </div><span class="badge bg-soft-success p-2"><span class="fw-bold fs-1 text-success">Open Now</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/donuthut.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">15% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/donut-hut-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Donuts hut</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">50</span>
+                                </div>
+                            </div><span class="badge bg-soft-success p-2"><span class="fw-bold fs-1 text-success">Open Now</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/ruby-tuesday.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">10% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/ruby-tuesday-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Ruby tuesday</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">50</span>
+                                </div>
+                            </div><span class="badge bg-soft-success p-2"><span class="fw-bold fs-1 text-success">Open Now</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/kuakata.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">10% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/kuakata-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Kuakata Fried Chicken</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">50</span>
+                                </div>
+                            </div><span class="badge bg-soft-success p-2"><span class="fw-bold fs-1 text-success">Open Now</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/red-square.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">10% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/red-square-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Kuakata Fried Chicken</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">50</span>
+                                </div>
+                            </div><span class="badge bg-soft-success p-2"><span class="fw-bold fs-1 text-success">Open Now</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+                    <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" th:src="@{/assets/img/gallery/taco-bell.png}" alt="..." />
+                        <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">10% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
+                        <div class="card-body ps-0">
+                            <div class="d-flex align-items-center mb-3"><img class="img-fluid" th:src="@{/assets/img/gallery/taco-bell-logo.png}" alt="" />
+                                <div class="flex-1 ms-3">
+                                    <h5 class="mb-0 fw-bold text-1000">Taco bell</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">50</span>
+                                </div>
+                            </div><span class="badge bg-soft-success p-2"><span class="fw-bold fs-1 text-success">Open Now</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center mt-5"> <a class="btn btn-lg btn-primary" href="#!">View All <i class="fas fa-chevron-right ms-2"> </i></a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================-->
+    <!-- 재료 별 찾기-->
+    <!-- <section> begin ============================-->
+    <section class="py-8 overflow-hidden" style="padding-top: 80px; padding-bottom: 0px">
+
+        <div class="container">
+            <div class="row flex-center mb-6">
+                <div class="col-lg-7">
+                    <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-start">Search by Food</h5>
+                </div>
+                <div class="col-lg-4 text-lg-end text-center"><a class="btn btn-lg text-800 me-2" th:href="@{/food/list}" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a></div>
+                <div class="col-lg-auto position-relative">
+                    <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+                    <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+                </div>
+            </div>
+            <div class="row flex-center">
+                <div class="col-12">
+                    <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <div class="row h-100 align-items-center">
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/egg.jpg}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">난류</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/milk.jpg}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">우유</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/jat.jpg}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">잣</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/sub-sandwich.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/chowmein.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/steak.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="5000">
+                                <div class="row h-100 align-items-center">
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/search-pizza.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">이렇게</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/burger.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">반복</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/noodles.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">할거야</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/sub-sandwich.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/chowmein.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/steak.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="3000">
+                                <div class="row h-100 align-items-center">
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/search-pizza.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/burger.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/noodles.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/sub-sandwich.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/chowmein.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/steak.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row h-100 align-items-center">
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/search-pizza.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/burger.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/noodles.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/sub-sandwich.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/chowmein.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" th:src="@{/assets/img/gallery/steak.png}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of .container-->
+
+    </section>
+    <!-- <section> close ============================-->
+
 
 </main>
 <!-- ===============================================-->
 <!--    End of Main Content-->
 <!-- ===============================================-->
 
-</body>
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script>
+
+    const navLink = document.querySelector(".nav-link")
+
+    navLink.addEventListener("focus", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        navLink.style.color = "red"
+        navLink.style.textDecoration="#9da9bb"
+
+    },false)
+
+</script>
+<script th:src="@{/vendors/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/vendors/is/is.min.js}"></script>
+<script th:src="@{/vendors/fontawesome/all.min.js}"></script>
+<script th:src="@{/js/theme.js}"></script>
 
