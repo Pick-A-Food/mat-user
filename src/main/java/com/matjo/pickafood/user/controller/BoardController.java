@@ -26,10 +26,13 @@ public class BoardController {
 
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
+
         PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
 
         log.info(responseDTO);
+
         model.addAttribute("responseDTO", responseDTO);
+
     }
 
     @GetMapping("/register")

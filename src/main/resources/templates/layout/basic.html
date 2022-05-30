@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <link
             rel="stylesheet"
@@ -42,7 +43,7 @@
 
     <!-- Top tool -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-inline-flex" href="index.html"><img class="d-inline-block" th:src="@{/assets/img/gallery/logo.png}" alt="logo" /></a><!--<span class="text-1000 fs-3 fw-bold ms-2 text-gradient">Pick A Food</span>-->
+        <div class="container"><a class="navbar-brand d-inline-flex" th:href="@{/main/main}"><img class="d-inline-block" th:src="@{/assets/img/gallery/logo.png}" alt="logo" /></a><!--<span class="text-1000 fs-3 fw-bold ms-2 text-gradient">Pick A Food</span>-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
 
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
