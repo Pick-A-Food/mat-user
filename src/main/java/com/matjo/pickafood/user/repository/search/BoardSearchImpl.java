@@ -1,9 +1,14 @@
 package com.matjo.pickafood.user.repository.search;
 
+import com.matjo.pickafood.user.dto.BoardListReplyCountDTO;
+import com.matjo.pickafood.user.dto.BoardListWithImageDTO;
 import com.matjo.pickafood.user.entity.Board;
 import com.matjo.pickafood.user.entity.QBoard;
+import com.matjo.pickafood.user.entity.QBoardImage;
+import com.matjo.pickafood.user.entity.QReply;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -11,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -89,6 +95,96 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         // 데이터가 많을 수 있기 때문에 int 사용 안하고 보통 long 을 사용한다.
 
         return new PageImpl<>(list, pageable, count);
+    }
+
+    @Override
+    public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable) {
+
+        QBoard board = QBoard.board;
+        QReply reply = QReply.reply;
+
+        JPQLQuery<Board> query = from(board);
+        query.leftJoin(reply).on(reply.board.eq(board));
+        query.groupBy(board);
+
+        JPQLQuery<BoardListReplyCountDTO> dtojpqlQuery =
+                query.select(Projections.bean(BoardListReplyCountDTO.class,
+                        board.boardSeq,
+                        board.title,
+                        board.nickname,
+                        board.regDate,
+                        reply.count().as("replyCount")) );
+
+        this.getQuerydsl().applyPagination(pageable, dtojpqlQuery);
+
+        List<BoardListReplyCountDTO> list = dtojpqlQuery.fetch();
+
+        long totalCount = dtojpqlQuery.fetchCount();
+
+
+        return new PageImpl<>(list,pageable,totalCount);
+    }
+
+    @Override
+    public Page<BoardListWithImageDTO> searchWithImage(String[] types, String keyword, Pageable pageable) {
+
+        log.info("==================================");
+
+        log.info("==================================");
+
+        QBoard board = QBoard.board;
+        QBoardImage boardImage = QBoardImage.boardImage;
+        QReply reply =QReply.reply;
+
+        JPQLQuery<Board> query = from(board);
+        query.leftJoin(board.boardImages, boardImage);
+        query.leftJoin(reply).on(reply.board.eq(board));
+
+        //query.where(boardImage.ord.eq(0));
+
+        if(types != null && keyword != null){
+
+            BooleanBuilder booleanBuilder = new BooleanBuilder();
+
+            Arrays.stream(types).forEach(t -> {
+
+                if(t.equals("t")){
+                    booleanBuilder.or(board.title.contains(keyword));
+                }else if(t.equals("w")){
+                    booleanBuilder.or(board.nickname.contains(keyword));
+                }else if(t.equals("c")){
+                    booleanBuilder.or(board.content.contains(keyword));
+                }
+
+            });
+            query.where(booleanBuilder);
+
+        }//end if
+
+        query.where(board.boardSeq.gt(0));
+        query.where(boardImage.ord.goe(0));
+
+        query.groupBy(board);
+
+        this.getQuerydsl().applyPagination(pageable, query);
+
+        JPQLQuery<BoardListWithImageDTO> tupleJPQLQuery
+                = query.select(
+                Projections.bean(BoardListWithImageDTO.class,
+                        board.boardSeq,
+                        board.title,
+                        board.nickname,
+                        board.regDate,
+                        boardImage.fileLink.as("imgPath"),
+                        reply.countDistinct().as("replyCount")
+                )
+        );
+
+        List<BoardListWithImageDTO> dtoList = tupleJPQLQuery.fetch();
+
+        long totalCount = tupleJPQLQuery.fetchCount();
+
+        return new PageImpl<>(dtoList, pageable, totalCount);
     }
 
 }
