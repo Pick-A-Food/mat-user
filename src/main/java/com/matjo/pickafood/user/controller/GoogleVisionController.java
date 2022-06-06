@@ -2,21 +2,19 @@ package com.matjo.pickafood.user.controller;
 
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
-import com.matjo.pickafood.user.dto.Base64DTO;
+import com.google.protobuf.Descriptors;
+import com.matjo.pickafood.user.dto.UploadFileDTO;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@Controller
+@RestController
 @RequestMapping(value = "/vision")
 @Log4j2
 public class GoogleVisionController {
@@ -73,21 +71,21 @@ public class GoogleVisionController {
 
   @GetMapping("/ui")
   public void ui() {
-
+    log.info("/vision/ui");
   }
 
-  @GetMapping(value = "/detectText")
-  @ResponseBody
-  public boolean detectText (MultipartFile[] files) throws Exception {
-    MultipartFile file = files[0];
+  @ApiOperation(value = "Upload POST", notes = "POST 방식으로 파일 등록")
+  @PostMapping(value = "/detectText", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public String[] detectText (UploadFileDTO uploadFileDTO) throws Exception {
     log.info("=============");
-    log.info(file.getOriginalFilename());
+    log.info(uploadFileDTO);
     log.info("=============");
 
+    Map<String, String> result = new HashMap<>();
     // Instantiates a client
     try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
 
-      byte[] imageBytes = file.getBytes();
+      byte[] imageBytes = uploadFileDTO.getFile().getBytes();
 
       // Reads the image file into memory
       ByteString imgBytes = ByteString.copyFrom(imageBytes);
@@ -106,19 +104,31 @@ public class GoogleVisionController {
       BatchAnnotateImagesResponse response = vision.batchAnnotateImages(requests);
       List<AnnotateImageResponse> responses = response.getResponsesList();
 
-      for (AnnotateImageResponse res : responses) {
+      for (int i = 0; i < responses.size(); i++) {
+        AnnotateImageResponse res = responses.get(i);
         if (res.hasError()) {
           System.out.printf("Error: %s\n", res.getError().getMessage());
-          return false;
+          return new String[]{"Error"};
         }
+        if (i == 0) {
+          List<EntityAnnotation> annotations = res.getTextAnnotationsList();
+          for (int j = 0; j < annotations.size(); j++) {
+            EntityAnnotation annotation = annotations.get(j);
+            if (j == 0) {
+              annotation.getAllFields().
+                      forEach((k, v) ->
+                              {
+                                System.out.printf("%s : %s ......\n", k, v.toString());
+                                result.put(k.toString(), v.toString());
 
-        for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
-          annotation.getAllFields().forEach((k, v)->
-                  System.out.printf("%s : %s\n", k, v.toString()));
+                              }
+                      );
+            }
+          }
         }
       }
     }
 
-    return true;
+    return result.get("google.cloud.vision.v1.EntityAnnotation.description").split("\n");
   }
 }

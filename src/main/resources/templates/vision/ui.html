@@ -10,9 +10,8 @@
 
 <div layout:fragment="content">
     <h1>Google Vision API Use</h1>
-    <form class="imageForm" action="/vision/detectText" method="get">
-        <input type="file" accept="image/*" required name="imageFile"/>
-        <input type="hidden" name="imageBase64"/>
+    <form class="imageForm" action="/vision/detectText" method="post">
+        <input type="file" accept="image/*" multiple required name="imageFile"/>
         <button>Submit</button>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -21,7 +20,7 @@
 <script layout:fragment="script" th:inline="javascript">
   async function uploadToServer (file) {
     const response = await axios({
-      method: 'get',
+      method: 'post',
       url: '/vision/detectText',
       data: [file],
       headers: {
