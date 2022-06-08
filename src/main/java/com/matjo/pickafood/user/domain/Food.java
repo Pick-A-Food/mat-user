@@ -1,9 +1,16 @@
 package com.matjo.pickafood.user.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "food")
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Food {
 
     @Id

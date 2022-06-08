@@ -7,6 +7,7 @@ import com.matjo.pickafood.user.dto.UploadFileDTO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Files;
@@ -14,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-@RestController
+@Controller
 @RequestMapping(value = "/vision")
 @Log4j2
 public class GoogleVisionController {
@@ -76,6 +77,7 @@ public class GoogleVisionController {
 
   @ApiOperation(value = "Upload POST", notes = "POST 방식으로 파일 등록")
   @PostMapping(value = "/detectText", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
   public String[] detectText (UploadFileDTO uploadFileDTO) throws Exception {
     log.info("=============");
     log.info(uploadFileDTO);
